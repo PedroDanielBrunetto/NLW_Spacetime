@@ -1,26 +1,18 @@
-// criando uma api
+/* eslint-disable prettier/prettier */
 import fastify from 'fastify'
-import { PrismaClient } from '@prisma/client'
+import { memoriesRoutes } from './routes/memories'
+import cors from '@fastify/cors'
 
 const app = fastify()
-const prisma = new PrismaClient()
 
-// criando a primeira rota
-// metodo get porque o navegador quando acessa uma url diretamente de dentro, ele sempre vai utilizar o: HTTP Method: GET
-
-app.get('/users', async () => {
-  const users = await prisma.user.findMany()
-
-  return users
+app.register(cors, {
+  origin: true, // todas URLs de front-end poderao acessar nosso back-end
 })
+app.register(memoriesRoutes)
 
-// API RESTfull
-
-app
-  .listen({
+app.listen({
     port: 3333,
   })
   .then(() => {
-    console.log('💻 HTTP server running on http://localhost:3333')
-  }) // assim que o servidor estiver no ar, eu quero entao declarar uma funcao
-// essa porta significa que acessando essa porta, vai bater nesse servidor.
+    console.log('HTTP server running on http://localhost:3333')
+  })
