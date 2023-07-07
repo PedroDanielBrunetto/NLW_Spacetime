@@ -1,5 +1,6 @@
 import { getUser } from "@/src/lib/auth";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Profile(){
   const { name, avatarUrl } = getUser()
@@ -9,7 +10,7 @@ export default function Profile(){
           <Image src={avatarUrl} width={40} height={40} alt="" className="w-10 h-10 rounded-full"/>
           <p className="max-w-[140px] text-sm leading-snug">
             {name}
-            <a href="" className="block text-red-400 hover:text-red-300">
+            <a href="/api/auth/logout" className="block text-red-400 hover:text-red-300">
               Quero sair
             </a>
           </p>
