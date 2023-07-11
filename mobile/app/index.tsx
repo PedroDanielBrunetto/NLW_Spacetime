@@ -6,23 +6,11 @@ import { useAuthRequest, makeRedirectUri } from 'expo-auth-session'
 import { api } from '../src/lib/api'
 import * as SecureStore from 'expo-secure-store';
 
-import { StatusBar } from 'expo-status-bar'
 import {
-  ImageBackground,
-  StyleSheet,
   Text,
   View,
   TouchableOpacity,
 } from 'react-native'
-import {
-  useFonts,
-  Roboto_400Regular,
-  Roboto_700Bold,
-} from '@expo-google-fonts/roboto'
-import { 
-  BaiJamjuree_700Bold 
-} from '@expo-google-fonts/bai-jamjuree'
-import BlurBg from '../src/assets/bg-luz.png'
 import Stripes from '../src/assets/stripes.svg'
 import NLWlogo from '../src/assets/nlw-logo.svg'
 
@@ -37,12 +25,7 @@ const discovery = {
 export default function App() {
   const router = useRouter()
 
-  // Retorna um booleano avisando quando as fonts terminaram de carregar
-  const [hasLoadedFonts] = useFonts({
-    Roboto_400Regular,
-    Roboto_700Bold,
-    BaiJamjuree_700Bold,
-  })
+  
 
   const [request, response, signInWithGithub] = useAuthRequest(
     {
@@ -79,17 +62,11 @@ export default function App() {
     }
   }, [response])
 
-  if (!hasLoadedFonts) {
-    return null
-  }
+  
   return (
-    <ImageBackground
-      source={BlurBg}
-      className="relative flex-1 items-center bg-gray-900 px-8 py-10"
-      imageStyle={{ position: 'absolute', left: '-100%' }}
+    <View
+      className=" flex-1 items-center  px-8 py-10"
     >
-      <StyledStripes className="absolute left-2" />
-
       <View className="flex-1 items-center justify-center gap-6">
         <NLWlogo />
         <View className="space-y-2">
@@ -111,12 +88,9 @@ export default function App() {
           </Text>
         </TouchableOpacity>
       </View>
-
       <Text className="text-center font-body text-sm leading-relaxed text-[#9e9ea0]">
         Feito com 💜 no NLW da Rocketseat
       </Text>
-
-      <StatusBar style="light" translucent />
-    </ImageBackground>
+    </View>
   )
 }
